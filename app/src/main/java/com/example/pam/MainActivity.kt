@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Home()
+                    TampilLayar(pesan = getString(R.string.greeting), dari = getString(R.string.name) )
 
                 }
             }
@@ -53,155 +53,50 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Home(){
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+fun TText(nama: String,form: String, modifier: Modifier = Modifier) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier) {
         Text(
-            text = "WEATHER APP",
-            fontSize = 40.sp)
-        BoxHeader()
-
-        Spacer(modifier = Modifier.padding(10.dp))
-
-        Lokasi()
-
-        Spacer(modifier = Modifier.padding(10.dp))
-
-        Keterangan()
-
-
-    }
-}
-
-@Composable
-fun BoxHeader(){
-    Box(modifier = Modifier
-        .fillMaxWidth()
-        .clip(RoundedCornerShape(20.dp))
-        .background(Color.Cyan))
-    {
-        Column(horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()) {
-            Image(
-                painter = painterResource(id = R.drawable.bgt),
-                contentDescription = "",
-                modifier = Modifier.size(150.dp))
-            Text(
-                text = "Rain",
-                fontSize = 25.sp,
-                modifier = Modifier.padding(10.dp)
-            )
-        }
-    }
-}
-@Composable
-fun Lokasi(){
-    Text(
-        text = "19 C",
-        fontSize = 64.sp,
-        fontWeight = FontWeight.Bold
-    )
-    Row(){
-        Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
-            contentDescription = "", modifier = Modifier.size(40.dp)
+            color= Color.Green,
+            text = nama,
+            fontSize = 70.sp,
+            lineHeight = 110.sp,
+            textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.padding(5.dp))
-        Text(text = "Yogyakarta", fontSize = 40.sp)
-
+        Text(
+            color= Color.White,
+            text = form,
+            fontSize = 60.sp,
+            modifier = Modifier
+                .padding(16.dp)
+                .align(alignment = Alignment.CenterHorizontally)
+        )
     }
-    Spacer(modifier = Modifier.padding(5.dp))
-    Text(text = "Kasihan, Kabupaten Bantul,\n Daerah Istimewa Yogyakarta",
-        textAlign = TextAlign.Center,
-        color = Color.Gray)
 }
 @Composable
-fun Keterangan() {
-    Box(
-        Modifier
-            .clip(RoundedCornerShape(10.dp))
-            .background(Color.Cyan)
-            .fillMaxWidth()
-            .padding(10.dp)
-    ) {
-        Row(
+fun TampilLayar(pesan: String,dari: String){
+    val image= painterResource(id = R.drawable.ww)
+    Box {
+        Image(painter =image,
+            contentDescription = null,
+            contentScale = ContentScale.FillHeight,
+            modifier = Modifier.fillMaxSize())
+        TText(
+            nama = pesan,
+            form = dari,
             modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxHeight(),
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "Humidity",
-                    color = Color.Black,
-                    fontSize = 14.sp,
-                    modifier = Modifier,
-                )
-                Text(
-                    text = "98%",
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    modifier = Modifier,
-                    fontWeight = FontWeight.Bold
-                )
+                .fillMaxSize()
+                .padding(8.dp)
 
-                Spacer(modifier = Modifier.padding(10.dp))
-                Text(
-                    text = "Sunrise",
-                    color = Color.Black,
-                    fontSize = 14.sp,
-                    modifier = Modifier,
-                )
-                Text(
-                    text = "05.00 AM",
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    modifier = Modifier,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            Column(){
-                Text(
-                    text = "UV Index",
-                    color = Color.Black,
-                    fontSize = 14.sp,
-                    modifier = Modifier,
-                )
-                Text(
-                    text = "9 / 10",
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    modifier = Modifier,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.padding(10.dp))
-                Text(
-                    text = "Sunset",
-                    color = Color.Black,
-                    fontSize = 14.sp,
-                    modifier = Modifier,
-                )
-                Text(
-                    text = "05.40 PM",
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    modifier = Modifier,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-        }
+        )
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun HomePreview() {
     PAMTheme {
-        Home()
+
     }
 }
